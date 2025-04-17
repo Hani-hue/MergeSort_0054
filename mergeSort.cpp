@@ -1,35 +1,39 @@
 #include <iostream>
 using namespace std;
 
+// create main array & temporary array
 int arr[20], B[20];
-
+// n is array input size
 int n;
 
 void input()
 {
-    cout << "Masukkan Panjang element array; ";
-    cin >> n;
-
-    if (n <= 20)
+    while (true)
     {
-        break;
-    }
-    else
-    {
-        cout << "\nMaksimal panjang array adalah 20";
-    }
+        cout << "Masukkan Panjang element array; ";
+        cin >> n;
 
+        if (n <= 20)
+        {
+            break;
+        }
+        else
+        {
+            cout << "\nMaksimal panjang array adalah 20";
+        }
+    }
     cout << "\n==========================================";
-    cout << "n\Inputkan Isi Element Array";
+    cout << "\nInputkan Isi Element Array";
     cout << "\n==========================================" << endl;
 
-    for (INT I = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         cout << "Array index ke -  " << i << ": ";
         cin >> arr[i]
     }
 }
 
+// create function mergesort
 void mergeSort(int low, int high)
 {
     if (low >= high)
@@ -49,9 +53,9 @@ void mergeSort(int low, int high)
     int j = mid + 1; // step 4.b
     int k = low;     // step 4.c
 
-    while (i <= mid && j <= high)
+    while (i <= mid && j <= high) // step 4.d
     {
-        if (arr[i] <= arr[j])
+        if (arr[i] <= arr[j]) // step 4.d.i
         {
             B[k] = arr[i];
             i++;
@@ -62,7 +66,7 @@ void mergeSort(int low, int high)
             j++;
         }
 
-        k++;
+        k++; // step 4.d.ii
     }
 
     while (j <= high)
@@ -77,4 +81,27 @@ void mergeSort(int low, int high)
         i++;           // step 4.f.ii
         k++;           // step 4.f.iii
     }
+
+    // step 5
+    for (int x = low; x <= high; x++)
+    {
+        arr[x] = B[x];
+    }
+}
+
+void output()
+{
+    cout << "\nData setelah diurutkan (Merge Sort); ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main()
+{
+    input();
+    mergeSort(0, n - 1);
+    output();
 }
